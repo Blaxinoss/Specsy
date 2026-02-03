@@ -11,9 +11,10 @@ struct liveCPU {
 
 
     //  Live Metrics
-    double temperatureC;
+     // double temperatureC;
     double loadPercent;
-    double powerWatts;
+    double currentGHz;
+    // double powerWatts;
 };
 
 struct staticCPU {
@@ -31,9 +32,7 @@ struct staticCPU {
     int logicalThreads;
     int numaNodes;
 
-
     double baseGHz;
-    double maxGHz;
     double currentGHz;
 
 
@@ -46,8 +45,14 @@ struct staticCPU {
 
 staticCPU getStaticCPUInfo();
 liveCPU getLiveCPUInfo();
+
+
 std::string getCPUVendor();
 std::string getCPUModelName();
 void getFamilyModel(int &family, int &model, int &stepping);
+
+float calculateCPULoad();
+void getCPUSpeeds(double &base, double &current, staticCPU& cpu);
+
 
 #endif //CODEFORCES_CPUINFO_H
