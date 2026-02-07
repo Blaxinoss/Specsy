@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include "cpuInfo.h"
+#include "WmiClient.h"
 
 int main() {
     std::cout << "Gathering System Info..." << std::endl;
@@ -17,6 +18,23 @@ int main() {
     std::cout << "---------------------------------" << std::endl;
 
     std::cout << "Monitoring Live Data (Press Ctrl+C to stop)..." << std::endl;
+
+
+    IWbemServices* pSvc = NULL;
+
+    // 1. اتصل
+    if (initWmiCOM(&pSvc) == S_OK) {
+        cout << "Connected! Fetching Data..." << endl;
+
+        // 2. هات الداتا
+        getRamDetails(pSvc);
+
+        // 3. اقفل وامشي
+        closeWmiCOM(pSvc);
+    } else {
+        cout << "Connection Failed!" << endl;
+    }
+
 
     while (true) {
         liveCPU live = getLiveCPUInfo();

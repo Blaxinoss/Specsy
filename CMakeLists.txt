@@ -7,7 +7,11 @@ add_executable(codeforces main.cpp
         cpuInfo.h
         cpuInfo.cpp
         WinRing0Wrapper.h
+        Wmi.cpp
+        WmiClient.h
 )
 
 
-target_link_libraries(codeforces PowrProf)
+target_link_libraries(codeforces PowrProf wbemuuid
+        ole32
+        oleaut32)
